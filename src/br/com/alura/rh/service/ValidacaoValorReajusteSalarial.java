@@ -10,10 +10,10 @@ public class ValidacaoValorReajusteSalarial implements ValidacaoReajuste{
 
     public void ValidacaoReajuste(Funcionario funcionario, BigDecimal aumento) {
         //regra de negocio para validar aumento de salario em valor
-        BigDecimal percentualReajuste = aumento.divide(funcionario.getSalario(), RoundingMode.HALF_UP);
+        BigDecimal percentualReajuste = aumento.divide(funcionario.getDadosPessoais().getSalario(), RoundingMode.HALF_UP);
         if (percentualReajuste.compareTo(new BigDecimal("0.4")) > 0) {
             throw new ValidacaoException("Reajuste nao pode ser superior a 40% do salario!");
         }
-        funcionario.atualizarSalario(funcionario.getSalario().add(aumento));
+        funcionario.atualizarSalario(funcionario.getDadosPessoais().getSalario().add(aumento));
     }
 }
